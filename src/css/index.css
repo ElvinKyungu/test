@@ -1,0 +1,14 @@
+@import url('https://fonts.googleapis.com/css2?family=Onest:wght@100..900&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .aside_link {
+    @apply px-4 cursor-pointer w-full relative flex justify-center 
+      transition text-white;
+  }
+  .dark {
+    @apply bg-[#222];
+  }
+}
