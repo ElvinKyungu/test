@@ -2,9 +2,9 @@
   import { useUserStore } from '../../stores/store'
   import { ref, onMounted, defineEmits } from 'vue'
   import Swal from 'sweetalert2'
-  import { editUserProfile, getUserProfile } from '../../lib/api'
+  import { editUserProfile, getUserProfile } from '../../api/userService'
   import Spinner from '../Spinner.vue'
-  import { UserProfile } from '../../types/type'
+  import { UserProfile } from '../../types/index'
   import { useDark } from '@vueuse/core'
   import { useForm } from 'vee-validate'
   import * as Yup from 'yup'
@@ -70,7 +70,6 @@
           last_name: userProfileData.last_name || '',
           role: userProfileData.role || '',
           email: userProfileData.email || '',
-          company_id: userProfileData.company_id || null,
           avatar: userStore.getUserInfo.avatar || ''
         }
       }

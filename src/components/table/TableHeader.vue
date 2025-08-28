@@ -2,7 +2,7 @@
 import { defineProps, defineEmits } from 'vue'
 import IconTop from '../icons/IconTop.vue'
 import IconDown from '../icons/IconDown.vue'
-import type { UserDeviceData } from '../../types/type'
+import type { UserDeviceData } from '../../types/index'
 
 defineProps({
   sortColumn: {

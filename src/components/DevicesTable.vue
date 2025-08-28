@@ -14,7 +14,7 @@
   } from '../lib/map'
   import { useMapStore } from '../stores/mapStore'
   import { useUserDataStore } from '../stores/userStore'
-  import type { UserDeviceData } from '../types/type'
+  import type { UserDeviceData } from '../types/index'
   import { useUserStore } from '../stores/store'
 
   const userStore = useUserStore()

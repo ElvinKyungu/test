@@ -5,7 +5,7 @@
   import { useDark } from '@vueuse/core'
   import { createAndDisplayDevicesPositions } from '../lib/map'
   import { darkModeStyles, lightModeStyles } from '../google-map/googlemaploader'
-  import type { UserDeviceData } from '../types/type'
+  import type { UserDeviceData } from '../types/index'
   import { useUserDataStore } from '../stores/userStore'
   import LogoutModal from './modal/LogoutModal.vue'
   import Profile from './profiles/Profile.vue'

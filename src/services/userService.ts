@@ -1,6 +1,6 @@
 // services/userService.ts
 import { supabase } from '../api/supabaseClient'
-import type { UserDeviceData } from '../types/type'
+import type { UserDeviceData } from '../types'
 export const getAllUserDatas = async (userID: string) => {
   try {
     const { data, error } = await supabase

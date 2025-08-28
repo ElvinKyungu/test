@@ -1,4 +1,4 @@
-import type { UserDeviceData } from '../types/type'
+import type { UserDeviceData } from '../types'
 import { format } from 'date-fns'
 
 let markers: google.maps.Marker[] = []

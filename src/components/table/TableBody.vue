@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { defineProps, defineEmits } from 'vue'
-import type { UserDeviceData } from '../../types/type'
+import type { UserDeviceData } from '../../types/index'
 
 defineProps({
   devices: {

@@ -1,7 +1,7 @@
 <script lang="ts" setup>
   import { useUserStore } from '../../stores/store'
   import { ref, defineEmits } from 'vue'
-  import { uploadAvatar, } from '../../lib/api'
+  import { uploadAvatar, } from '../../api/userService'
   import { useDark } from '@vueuse/core'
   import IconClose from '../icons/IconClose.vue'
   import IconDelete from '../icons/IconDelete.vue'

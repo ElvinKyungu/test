@@ -2,28 +2,6 @@ import { supabase } from '../api/supabaseClient'
 import { useUserStore } from '../stores/store'
 import router from '../routes/router'
 
-async function signinWithOtp(email: string): Promise<any> {
-  try {
-    const { data, error } = await supabase.auth.signInWithOtp({
-      email: email,
-      options: {
-        // set this to false if you do not want the user to be automatically signed up
-        shouldCreateUser: true,
-        emailRedirectTo: `${import.meta.env.VITE_SITE_URL}/welcome`
-      }
-    })
-    if (error) {
-      console.error(error)
-      return { error }
-    }
-    router.push('/send-magiklink')
-    return { data }
-  } catch (error) {
-    console.log("Une erreur s'est produite ", error)
-    return { error }
-  }
-}
-
 async function signinWithPassword({password, email}: any): Promise<any> {
   try {
     const { data, error } = await supabase.auth.signInWithPassword({
@@ -59,6 +37,5 @@ async function signinWithPassword({password, email}: any): Promise<any> {
   }
 }
 export { 
-  signinWithOtp,
   signinWithPassword,
 }

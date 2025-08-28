@@ -4,8 +4,8 @@
   import { supabase } from '../api/supabaseClient'
   import { useRouter } from 'vue-router'
   import { useUserStore } from '../stores/store'
-  import { getUserProfile } from '../lib/api'
-  import { UserProfile } from '../types/type'
+  import { getUserProfile } from '../api/userService'
+  import { UserProfile } from '../types/index'
   import Spinner from '../components/Spinner.vue'
 
   const userStore = useUserStore()

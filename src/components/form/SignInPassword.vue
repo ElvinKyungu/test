@@ -26,6 +26,7 @@ const generalError = ref('')
 const handleSigninWithPassword = async () => {
   generalError.value = ''
   if (isFormValid.value) {
+   
     isSubmited.value = true
     try {
       const result = await signinWithPassword(userLoginData.value)

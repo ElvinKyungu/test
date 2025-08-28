@@ -1,16 +1,14 @@
-import { supabase } from '../api/supabaseClient'
+import { supabase } from './supabaseClient'
 import type { 
   SupabaseError,
   UserProfile,
-} from '../types/type'
+} from '../types'
 import { useUserStore } from '../stores/store'
-
-
 
 const getUserProfile = async (userId: string): Promise<UserProfile | { error: any }> => {
   try {
     const { data, error } = await supabase
-      .from('profiles')
+      .from('users')
       .select('*')
       .eq('id', userId)
       .single()
@@ -21,6 +19,7 @@ const getUserProfile = async (userId: string): Promise<UserProfile | { error: an
       console.error("User profile not found.")
       return { error: "User profile not found." }
     }
+    console.log("User profile retrieved successfully:", data)
     return data
   } catch (error) {
     console.error((error as SupabaseError).message)
@@ -97,7 +96,7 @@ const uploadAvatar = async (event: InputEvent & { target: HTMLInputElement }): P
 
 const editUserProfile = async (updates: UserProfile): Promise<boolean> => {
   try {
-    const { error } = await supabase.from('profiles').upsert(updates)
+    const { error } = await supabase.from('users').upsert(updates)
     if (error) {
       throw error
     }
