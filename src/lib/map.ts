@@ -5,7 +5,7 @@ let markers: google.maps.Marker[] = []
 
 // Function to set the map on all markers.
 function setMapOnAll(map: google.maps.Map | null) {
-  markers.forEach(marker => marker.setMap(map))
+  markers.forEach((marker) => marker.setMap(map))
 }
 
 // Removes the markers from the map, but keeps them in the array.
@@ -31,31 +31,38 @@ export const createAndDisplayDevicesPositions = async (data: UserDeviceData[], m
   createMarker(map, data)
 }
 
-export const zoomAndCenterMap = (map: google.maps.Map, coord: { device_latitude: number; device_longitude: number }, zoomLevel = 10) => {
+export const zoomAndCenterMap = (
+  map: google.maps.Map,
+  coord: { device_latitude: number; device_longitude: number },
+  zoomLevel = 10
+) => {
   map.setCenter(new google.maps.LatLng(coord.device_latitude, coord.device_longitude))
   map.setZoom(zoomLevel)
 }
 
 // Groups device data by device ID.
 export const groupByDeviceId = (data: UserDeviceData[]): Record<string, UserDeviceData[]> => {
-  return data.reduce((acc, curr) => {
-    const { id } = curr
-    if (!acc[id]) {
-      acc[id] = []
-    }
-    acc[id].push(curr)
-    return acc
-  }, {} as Record<string, UserDeviceData[]>)
+  return data.reduce(
+    (acc, curr) => {
+      const { id } = curr
+      if (!acc[id]) {
+        acc[id] = []
+      }
+      acc[id].push(curr)
+      return acc
+    },
+    {} as Record<string, UserDeviceData[]>
+  )
 }
 
 // Create markers for each device on the map.
 export const createMarker = (map: google.maps.Map, data: UserDeviceData[]) => {
-  data.forEach(deviceData => {
+  data.forEach((deviceData) => {
     const myLatLng = { lat: deviceData.last_latitude, lng: deviceData.last_longitude }
     const marker = new google.maps.Marker({
       position: myLatLng,
       map,
-      title: deviceData.id.toString(),
+      title: deviceData.id.toString()
     })
     markers.push(marker)
 
@@ -98,14 +105,13 @@ export const addPopin = (map: google.maps.Map, marker: google.maps.Marker, conte
   })
 }
 
-
 export const createFlightPath = (map: google.maps.Map, devicePath: { lat: number; lng: number }[]) => {
   const flightPath = new google.maps.Polyline({
     path: devicePath,
     geodesic: true,
     strokeColor: '#FF0000',
     strokeOpacity: 1.0,
-    strokeWeight: 2,
+    strokeWeight: 2
   })
 
   flightPath.setMap(map)

@@ -33,25 +33,19 @@
 <template>
   <div>
     <div class="flex items-center">
-      <div
-        :class="avatarClass"
-        class="
-          shadow-md rounded-full
-          cursor-pointer -mt-5
-        "
-      >
+      <div :class="avatarClass" class="shadow-md rounded-full cursor-pointer -mt-5">
         <img
           v-if="imageUrl"
           :src="imageUrl"
           :alt="altText"
           class="w-full h-full rounded-full object-center object-cover"
-        >
+        />
         <img
           v-else
           src="../../assets/user_profil.jpg"
           :alt="altText"
           class="w-full h-full rounded-full object-center object-cover"
-        >
+        />
       </div>
     </div>
   </div>

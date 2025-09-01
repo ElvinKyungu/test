@@ -1,4 +1,3 @@
-
 <script setup lang="ts">
   import { onMounted, ref, Ref } from 'vue'
   import { supabase } from '../api/supabaseClient'
@@ -28,8 +27,8 @@
           console.error(result.error)
         } else {
           userProfile.value = result
-          if ('avatar' in userProfile.value) { 
-            const { name, lastname } = data.session.user.user_metadata;
+          if ('avatar' in userProfile.value) {
+            const { name, lastname } = data.session.user.user_metadata
             if (email) {
               userStore.setUserData({
                 userID: id,
@@ -50,18 +49,12 @@
   })
 </script>
 <template>
-  <div 
-    class="
-      p-6 bg-white border border-gray-200 flex-col gap-10
-      rounded-lg shadow-md hover:bg-gray-100 w-full h-screen flex justify-center items-center
-    "
+  <div
+    class="p-6 bg-white border border-gray-200 flex-col gap-10 rounded-lg shadow-md hover:bg-gray-100 w-full h-screen flex justify-center items-center"
   >
     <div class="flex flex-col items-center justify-center gap-4">
-      <Spinner class="text-gray-700"/>
-      <p class="font-normal text-gray-500">
-        Redirecting...
-      </p>
+      <Spinner class="text-gray-700" />
+      <p class="font-normal text-gray-500">Redirecting...</p>
     </div>
   </div>
 </template>
-

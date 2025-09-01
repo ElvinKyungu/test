@@ -1,25 +1,18 @@
 import { supabase } from './supabaseClient'
-import type { 
-  SupabaseError,
-  UserProfile,
-} from '../types'
+import type { SupabaseError, User } from '../types'
 import { useUserStore } from '../stores/store'
 
-const getUserProfile = async (userId: string): Promise<UserProfile | { error: any }> => {
+const getUserProfile = async (userId: string): Promise<User | { error: any }> => {
   try {
-    const { data, error } = await supabase
-      .from('users')
-      .select('*')
-      .eq('id', userId)
-      .single()
+    const { data, error } = await supabase.from('users').select('*').eq('id', userId).single()
     if (error) {
       return { error }
     }
     if (!data) {
-      console.error("User profile not found.")
-      return { error: "User profile not found." }
+      console.error('User profile not found.')
+      return { error: 'User profile not found.' }
     }
-    console.log("User profile retrieved successfully:", data)
+    console.log('User profile retrieved successfully:', data)
     return data
   } catch (error) {
     console.error((error as SupabaseError).message)
@@ -29,13 +22,10 @@ const getUserProfile = async (userId: string): Promise<UserProfile | { error: an
 
 const downloadAvatar = async (path: string): Promise<string | null> => {
   try {
-    const { data } = supabase
-      .storage
-      .from('avatars')
-      .getPublicUrl(path)
+    const { data } = supabase.storage.from('avatars').getPublicUrl(path)
 
     if (!data) {
-      console.error("No data received from Supabase download")
+      console.error('No data received from Supabase download')
       return null
     }
     const url = data.publicUrl
@@ -67,10 +57,7 @@ const uploadAvatar = async (event: InputEvent & { target: HTMLInputElement }): P
 
     const fileExt = file.name.split('.').pop()
     const filePath = `${Math.random()}.${fileExt}`
-    const { data, error: uploadError } = await supabase
-      .storage
-      .from('avatars')
-      .upload(filePath, file)
+    const { data, error: uploadError } = await supabase.storage.from('avatars').upload(filePath, file)
 
     if (uploadError) throw uploadError
 
@@ -94,23 +81,27 @@ const uploadAvatar = async (event: InputEvent & { target: HTMLInputElement }): P
   }
 }
 
-const editUserProfile = async (updates: UserProfile): Promise<boolean> => {
+const editUserProfile = async (updates: User): Promise<boolean> => {
+  console.log('Editing user profile:', updates)
   try {
-    const { error } = await supabase.from('users').upsert(updates)
-    if (error) {
-      throw error
-    }
+    const { role, ...safeUpdates } = updates
+
+    const { error } = await supabase.from('users').update(safeUpdates).eq('id', updates.id)
+    if (error) throw error
+
     const userStore = useUserStore()
-    const avatar = updates.avatar !== null ? updates.avatar : ''
-    const token = userStore.getUserInfo.token !== null ? userStore.getUserInfo.token : ''
+    const avatar = updates.avatar || ''
+    const token = userStore.getUserInfo.token || ''
+
     userStore.setUserData({
       userID: updates.id,
       email: updates.email,
-      avatar: avatar,
-      first_name: updates.first_name,
-      last_name: updates.last_name,
-      token: token
+      avatar,
+      first_name: updates.first_name || '',
+      last_name: updates.last_name || '',
+      token
     })
+
     return true
   } catch (error) {
     console.log((error as SupabaseError).message)
@@ -118,8 +109,4 @@ const editUserProfile = async (updates: UserProfile): Promise<boolean> => {
   }
 }
 
-export { 
-  getUserProfile,
-  editUserProfile,
-  uploadAvatar,
-}
+export { getUserProfile, editUserProfile, uploadAvatar }

@@ -18,7 +18,7 @@ const routes: Array<RouteRecordRaw> = [
     name: 'NotFound',
     component: () => import('../pages/notFound.vue')
   },
-  { 
+  {
     path: '/send-magiklink',
     name: 'send-magiklink',
     component: SendMagikLink

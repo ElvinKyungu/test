@@ -20,26 +20,28 @@ export const useUserStore = defineStore('user', {
     avatar: user_profil
   }),
   actions: {
-    setUserData(
-      { userID, first_name, last_name, token, email, avatar }: 
-      { 
-        userID: string, 
-        first_name: string, 
-        last_name: string, 
-        token: string, 
-        email:string, 
-        avatar: string 
-      }
-    ): void {
+    setUserData({
+      userID,
+      first_name,
+      last_name,
+      token,
+      email,
+      avatar
+    }: {
+      userID: string
+      first_name: string
+      last_name: string
+      token: string
+      email: string
+      avatar: string
+    }): void {
       this.userID = userID
       this.first_name = first_name
       this.last_name = last_name
       this.token = token
       this.email = email
       this.avatar = avatar
-      localStorage.setItem('user', JSON.stringify(
-        { userID, first_name, last_name, token, email, avatar }
-      ))
+      localStorage.setItem('user', JSON.stringify({ userID, first_name, last_name, token, email, avatar }))
     },
     clearUserData(): void {
       this.userID = null
@@ -61,15 +63,15 @@ export const useUserStore = defineStore('user', {
         this.email = email
         this.avatar = avatar
       }
-    },
+    }
   },
   getters: {
-    getUserInfo(): { 
-      userID: string | null; 
-      last_name: string | null;
-      first_name: string | null;
-      token: string | null, 
-      email: string | null,
+    getUserInfo(): {
+      userID: string | null
+      last_name: string | null
+      first_name: string | null
+      token: string | null
+      email: string | null
       avatar: string | null
     } {
       return {
@@ -80,6 +82,6 @@ export const useUserStore = defineStore('user', {
         email: this.email,
         avatar: this.avatar
       }
-    },
-  },
+    }
+  }
 })

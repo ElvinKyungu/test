@@ -1,7 +1,3 @@
 <template>
-  <div 
-    id="map" 
-    class="w-[100vw]"
-  >
-  </div>
+  <div id="map" class="w-[100vw]"></div>
 </template>

@@ -11,7 +11,7 @@ export function useAuth() {
     error.value = null
 
     const { error: err } = await supabase.auth.resetPasswordForEmail(email, {
-      redirectTo: 'https://ton-app.com/reset-password',
+      redirectTo: 'https://ton-app.com/reset-password'
     })
 
     if (err) {
@@ -24,6 +24,6 @@ export function useAuth() {
   return {
     sendResetPasswordEmail,
     error,
-    loading,
+    loading
   }
 }

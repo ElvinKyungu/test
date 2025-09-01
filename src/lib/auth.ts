@@ -2,7 +2,7 @@ import { supabase } from '../api/supabaseClient'
 import { useUserStore } from '../stores/store'
 import router from '../routes/router'
 
-async function signinWithPassword({password, email}: any): Promise<any> {
+async function signinWithPassword({ password, email }: any): Promise<any> {
   try {
     const { data, error } = await supabase.auth.signInWithPassword({
       email: email,
@@ -15,7 +15,7 @@ async function signinWithPassword({password, email}: any): Promise<any> {
     console.log('data', data)
     if (data) {
       const store = useUserStore()
-      const {name, email, lastname, avatar} = data.user.user_metadata
+      const { name, email, lastname, avatar } = data.user.user_metadata
       const id = data.user.id
       const token = data.session.access_token
 
@@ -36,6 +36,4 @@ async function signinWithPassword({password, email}: any): Promise<any> {
     throw error
   }
 }
-export { 
-  signinWithPassword,
-}
+export { signinWithPassword }

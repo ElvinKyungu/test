@@ -1,13 +1,9 @@
-<script setup lang="ts">
-
-</script>
+<script setup lang="ts"></script>
 
 <template>
   <div class="font-onest">
-    <RouterView class="text-[#8f8a8a]"/>
+    <RouterView class="text-[#8f8a8a]" />
   </div>
 </template>
 
-<style scoped>
-
-</style>
+<style scoped></style>
